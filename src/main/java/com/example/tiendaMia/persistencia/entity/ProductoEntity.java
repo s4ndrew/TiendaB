@@ -23,5 +23,6 @@ public class ProductoEntity {
     private Integer stock;
     //Relacion
     @ManyToOne
+    @JoinColumn(name = "id_categoria")
     private CategoriaEntity categoriaEntity;
 }
