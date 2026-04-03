@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +21,7 @@ public class VentaEntity {
     private LocalDate fecha;
     private Double total;
 
-    @OneToMany(mappedBy = "venta")
+    @OneToMany(mappedBy = "ventaEntity")
     private List<DetalleEntity> detalleEntityList;
 
     @ManyToOne
