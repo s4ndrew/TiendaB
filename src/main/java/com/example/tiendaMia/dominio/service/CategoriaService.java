@@ -1,15 +1,30 @@
-package com.example.tiendaMia.persistencia.service;
+package com.example.tiendaMia.dominio.service;
 
+import com.example.tiendaMia.dominio.dto.CategoriaDto;
+import com.example.tiendaMia.dominio.repository.CategoriaRepository;
 import com.example.tiendaMia.persistencia.crud.CrudCategoriaEntity;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ServiceCategoria {
+import java.util.List;
 
+@Service
+public class CategoriaService {
+
+    private final CategoriaRepository categoriaRepository;
+
+    public CategoriaService(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
+    }
+
+    public List<CategoriaDto> getAll(){
+        return categoriaRepository.getAll();
+    }
+
+    /*
     private final CrudCategoriaEntity categoriaEntityRepository;
 
-    public ServiceCategoria(CrudCategoriaEntity categoriaEntityRepository) {
+    public CategoriaService(CrudCategoriaEntity categoriaEntityRepository) {
         this.categoriaEntityRepository = categoriaEntityRepository;
     }
 
@@ -21,4 +36,5 @@ public class ServiceCategoria {
     public Iterable<CategoriaEntity> lisCategorias(CategoriaEntity categoria){
         return categoriaEntityRepository.findAll();
     }
+     */
 }

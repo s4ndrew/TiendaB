@@ -1,7 +1,5 @@
 package com.example.tiendaMia;
 
-import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
-import com.example.tiendaMia.persistencia.service.ServiceCategoria;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
