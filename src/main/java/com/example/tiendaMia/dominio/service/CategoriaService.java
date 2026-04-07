@@ -21,6 +21,10 @@ public class CategoriaService {
         return categoriaRepository.getAll();
     }
 
+    public CategoriaDto save(CategoriaDto categoriaDto){
+        return categoriaRepository.save(categoriaDto);
+    }
+
     /*
     private final CrudCategoriaEntity categoriaEntityRepository;
 

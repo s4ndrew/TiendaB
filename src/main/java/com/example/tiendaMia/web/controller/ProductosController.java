@@ -31,4 +31,9 @@ public class ProductosController {
     public  ResponseEntity<List<ProductoDto>> get(){
         return ResponseEntity.ok(productoService.getAll());
     }
+
+    @PostMapping
+    public ResponseEntity<ProductoDto> save(@RequestBody ProductoDto productoDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(productoDto));
+    }
 }

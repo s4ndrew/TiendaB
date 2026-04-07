@@ -19,6 +19,9 @@ public class ProductoService {
         return  productoRepository.getAll();
     }
 
+    public ProductoDto save(ProductoDto productoDto){
+        return productoRepository.save(productoDto);
+    }
     /*
     private final CrudProductosEntity crudProductosEntity;
 

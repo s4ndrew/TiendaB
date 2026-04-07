@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoriaRepository {
     List<CategoriaDto> getAll();
+    CategoriaDto save(CategoriaDto categoriaDto);
 }

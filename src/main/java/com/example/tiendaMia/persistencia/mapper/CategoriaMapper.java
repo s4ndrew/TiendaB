@@ -2,6 +2,7 @@ package com.example.tiendaMia.persistencia.mapper;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,4 +15,7 @@ public interface CategoriaMapper {
     @Mapping(source = "nombre",target = "nombre")
     CategoriaDto toDto(CategoriaEntity entity);
     List<CategoriaDto> toDto(Iterable<CategoriaEntity> categoriaEntityList);
+
+    @InheritInverseConfiguration
+    CategoriaEntity toEntity(CategoriaDto categoriaDto);
 }

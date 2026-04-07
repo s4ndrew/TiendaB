@@ -3,6 +3,7 @@ package com.example.tiendaMia.persistencia;
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
 import com.example.tiendaMia.dominio.repository.CategoriaRepository;
 import com.example.tiendaMia.persistencia.crud.CrudCategoriaEntity;
+import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
 import com.example.tiendaMia.persistencia.mapper.CategoriaMapper;
 import jakarta.persistence.Entity;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,11 @@ public class CategoriaEntityRepository implements CategoriaRepository {
     @Override
     public List<CategoriaDto> getAll() {
         return categoriaMapper.toDto(crudCategoriaEntity.findAll());
+    }
+
+    @Override
+    public CategoriaDto save(CategoriaDto categoriaDto) {
+        CategoriaEntity categoriaEntity = categoriaMapper.toEntity(categoriaDto);
+        return categoriaMapper.toDto(crudCategoriaEntity.save(categoriaEntity));
     }
 }

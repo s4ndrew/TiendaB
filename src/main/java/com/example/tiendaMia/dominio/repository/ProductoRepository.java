@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProductoRepository {
     List<ProductoDto> getAll();
+    ProductoDto save(ProductoDto productoDto);
 }

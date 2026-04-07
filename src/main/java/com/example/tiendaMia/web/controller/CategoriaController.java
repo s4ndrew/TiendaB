@@ -2,6 +2,7 @@ package com.example.tiendaMia.web.controller;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
 import com.example.tiendaMia.dominio.service.CategoriaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,14 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.serviceCategoria.guardarCategoria(categoria));
     }
     */
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<CategoriaDto>> getAll(){
         return ResponseEntity.ok(serviceCategoria.getAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoriaDto> save(@RequestBody CategoriaDto categoriaDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceCategoria.save(categoriaDto));
     }
 
 }
