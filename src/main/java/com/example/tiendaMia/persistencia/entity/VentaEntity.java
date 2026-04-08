@@ -25,5 +25,6 @@ public class VentaEntity {
     private List<DetalleEntity> detalleEntityList;
 
     @ManyToOne
+    @JoinColumn(name = "id_cliente")
     private ClienteEntity clienteEntity;
 }
