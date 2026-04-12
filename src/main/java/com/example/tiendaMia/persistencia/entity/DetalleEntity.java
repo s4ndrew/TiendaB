@@ -22,7 +22,9 @@ public class DetalleEntity {
     private Double precioUnitario;
     private Double subtotal;
     @ManyToOne
+    @JoinColumn(name = "id_venta")
     private VentaEntity ventaEntity;
     @ManyToOne
+    @JoinColumn(name = "id_producto")
     private ProductoEntity productoEntity;
 }
