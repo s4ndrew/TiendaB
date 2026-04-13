@@ -1,22 +1,22 @@
 package com.example.tiendaMia.web.controller;
 
 import com.example.tiendaMia.dominio.dto.ProductoDto;
-import com.example.tiendaMia.persistencia.entity.ProductoEntity;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateProductoDto;
 import com.example.tiendaMia.dominio.service.ProductoService;
-import org.hibernate.persister.entity.SingleTableEntityPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/productos")
-public class ProductosController {
+public class ProductoController {
 
     private final ProductoService productoService;
 
-    public ProductosController(ProductoService productoService) {
+    public ProductoController(ProductoService productoService) {
         this.productoService = productoService;
     }
 
@@ -42,5 +42,10 @@ public class ProductosController {
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         productoService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductoDto> update(@PathVariable Integer id, @RequestBody @Validated UpdateProductoDto updateProductoDto){
+       return ResponseEntity.ok( productoService.update(id, updateProductoDto));
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tiendaMia.dominio.service;
 
 import com.example.tiendaMia.dominio.dto.ClienteDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateClienteDto;
 import com.example.tiendaMia.dominio.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,9 @@ public class ClienteService {
 
     public void delete(Integer id){
             clienteRepository.delete(id);
+    }
+
+    public ClienteDto update(Integer id, UpdateClienteDto updateClienteDto){
+        return clienteRepository.update(id,updateClienteDto);
     }
 }

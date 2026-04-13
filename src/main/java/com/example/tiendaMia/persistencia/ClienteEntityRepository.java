@@ -1,6 +1,7 @@
 package com.example.tiendaMia.persistencia;
 
 import com.example.tiendaMia.dominio.dto.ClienteDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateClienteDto;
 import com.example.tiendaMia.dominio.repository.ClienteRepository;
 import com.example.tiendaMia.persistencia.crud.CrudClienteEntity;
 import com.example.tiendaMia.persistencia.entity.ClienteEntity;
@@ -35,5 +36,15 @@ public class ClienteEntityRepository implements ClienteRepository {
     @Override
     public void delete(Integer id) {
          crudClienteEntity.deleteById(id);
+    }
+
+    @Override
+    public ClienteDto update(Integer id, UpdateClienteDto updateClienteDto) {
+        ClienteEntity clienteEntity = crudClienteEntity.findById(id).orElse(null);
+        if (clienteEntity == null){
+            return null;
+        }
+        clienteMapper.updateClienteDto(updateClienteDto,clienteEntity);
+        return clienteMapper.toDto(crudClienteEntity.save(clienteEntity));
     }
 }

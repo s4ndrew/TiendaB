@@ -1,9 +1,11 @@
 package com.example.tiendaMia.web.controller;
 
 import com.example.tiendaMia.dominio.dto.ClienteDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateClienteDto;
 import com.example.tiendaMia.dominio.service.ClienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,5 +32,10 @@ public class ClienteController {
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         clienteService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteDto> update(@PathVariable Integer id,@RequestBody @Validated UpdateClienteDto updateClienteDto){
+        return ResponseEntity.ok(clienteService.update(id,updateClienteDto));
     }
 }

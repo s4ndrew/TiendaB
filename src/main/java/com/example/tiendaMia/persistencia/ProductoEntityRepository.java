@@ -1,6 +1,7 @@
 package com.example.tiendaMia.persistencia;
 
 import com.example.tiendaMia.dominio.dto.ProductoDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateProductoDto;
 import com.example.tiendaMia.dominio.repository.ProductoRepository;
 import com.example.tiendaMia.persistencia.crud.CrudProductoEntity;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
@@ -40,5 +41,16 @@ public class ProductoEntityRepository implements ProductoRepository {
     @Override
     public void delete(Integer id) {
         crudProductoEntity.deleteById(id);
+    }
+
+    @Override
+    public ProductoDto update(Integer id, UpdateProductoDto updateProductoDto) {
+        ProductoEntity productoEntity = crudProductoEntity.findById(id).orElse(null);
+        if (productoEntity == null){
+            return null;
+        }
+        productoMapper.updateProductoDto(updateProductoDto,productoEntity);
+
+        return productoMapper.toDto(crudProductoEntity.save(productoEntity));
     }
 }
