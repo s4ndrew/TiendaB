@@ -7,4 +7,5 @@ import java.util.List;
 public interface ClienteRepository {
     List<ClienteDto> getAll();
     ClienteDto save(ClienteDto clienteDto);
+    void delete(Integer id);
 }

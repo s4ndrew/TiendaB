@@ -1,7 +1,7 @@
 package com.example.tiendaMia.web.controller;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
-import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCategoriaDto;
 import com.example.tiendaMia.dominio.service.CategoriaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class CategoriaController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaDto> update(@PathVariable Integer id, @RequestBody @Validated UpdateCatDto updateCategoriaDto){
+    public ResponseEntity<CategoriaDto> update(@PathVariable Integer id, @RequestBody @Validated UpdateCategoriaDto updateCategoriaDto){
         return ResponseEntity.ok(serviceCategoria.update(id,updateCategoriaDto));
     }
 }

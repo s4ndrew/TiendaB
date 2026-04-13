@@ -1,7 +1,7 @@
 package com.example.tiendaMia.dominio.service;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
-import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCategoriaDto;
 import com.example.tiendaMia.dominio.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class CategoriaService {
     }
 
 
-    public CategoriaDto update(Integer id, UpdateCatDto updateCategoriaDto){
+    public CategoriaDto update(Integer id, UpdateCategoriaDto updateCategoriaDto){
         return categoriaRepository.update(id,updateCategoriaDto);
     }
     public void delete(Integer id){

@@ -31,4 +31,9 @@ public class ClienteEntityRepository implements ClienteRepository {
 
         return clienteMapper.toDto(crudClienteEntity.save(clienteEntity));
     }
+
+    @Override
+    public void delete(Integer id) {
+         crudClienteEntity.deleteById(id);
+    }
 }

@@ -36,4 +36,9 @@ public class ProductoEntityRepository implements ProductoRepository {
 
         return productoMapper.toDto(crudProductoEntity.save(productoEntity));
     }
+
+    @Override
+    public void delete(Integer id) {
+        crudProductoEntity.deleteById(id);
+    }
 }

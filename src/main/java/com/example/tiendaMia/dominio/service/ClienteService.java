@@ -21,4 +21,8 @@ public class ClienteService {
     public List<ClienteDto> getAll(){
         return clienteRepository.getAll();
     }
+
+    public void delete(Integer id){
+            clienteRepository.delete(id);
+    }
 }

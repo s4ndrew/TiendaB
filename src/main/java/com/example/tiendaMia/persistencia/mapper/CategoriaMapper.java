@@ -1,7 +1,7 @@
 package com.example.tiendaMia.persistencia.mapper;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
-import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCategoriaDto;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -23,5 +23,5 @@ public interface CategoriaMapper {
 
 
     //update
-    void updateCategoriaDto(UpdateCatDto updateCategoriaDto, @MappingTarget CategoriaEntity categoriaEntity);
+    void updateCategoriaDto(UpdateCategoriaDto updateCategoriaDto, @MappingTarget CategoriaEntity categoriaEntity);
 }

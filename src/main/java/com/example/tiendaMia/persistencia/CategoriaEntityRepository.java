@@ -1,7 +1,7 @@
 package com.example.tiendaMia.persistencia;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
-import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCategoriaDto;
 import com.example.tiendaMia.dominio.repository.CategoriaRepository;
 import com.example.tiendaMia.persistencia.crud.CrudCategoriaEntity;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
@@ -33,7 +33,7 @@ public class CategoriaEntityRepository implements CategoriaRepository {
     }
 
     @Override
-    public CategoriaDto update(Integer id, UpdateCatDto updateCategoriaDto) {
+    public CategoriaDto update(Integer id, UpdateCategoriaDto updateCategoriaDto) {
         CategoriaEntity categoriaEntity = crudCategoriaEntity.findById(id).orElse(null);
         if (categoriaEntity == null){
             return null;

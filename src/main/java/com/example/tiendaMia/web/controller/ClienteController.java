@@ -25,4 +25,10 @@ public class ClienteController {
     public ResponseEntity<List<ClienteDto>> get(){
         return ResponseEntity.ok(clienteService.getAll());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        clienteService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

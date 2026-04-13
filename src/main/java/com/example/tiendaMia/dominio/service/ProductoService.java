@@ -22,6 +22,8 @@ public class ProductoService {
     public ProductoDto save(ProductoDto productoDto){
         return productoRepository.save(productoDto);
     }
+
+    public void delete(Integer id){productoRepository.delete(id);}
     /*
     private final CrudProductosEntity crudProductosEntity;
 

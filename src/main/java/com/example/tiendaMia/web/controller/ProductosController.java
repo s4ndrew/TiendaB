@@ -3,6 +3,7 @@ package com.example.tiendaMia.web.controller;
 import com.example.tiendaMia.dominio.dto.ProductoDto;
 import com.example.tiendaMia.persistencia.entity.ProductoEntity;
 import com.example.tiendaMia.dominio.service.ProductoService;
+import org.hibernate.persister.entity.SingleTableEntityPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,11 @@ public class ProductosController {
     @PostMapping
     public ResponseEntity<ProductoDto> save(@RequestBody ProductoDto productoDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(productoDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        productoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
