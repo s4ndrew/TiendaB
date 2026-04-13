@@ -12,12 +12,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
-    @Mapping(source = "idCliente", target = "id")
     ClienteDto toDto(ClienteEntity clienteEntity);
     List<ClienteDto> toDto(List<ClienteEntity> clienteEntities);
 
     @InheritInverseConfiguration
-    @Mapping(target = "idCliente", ignore = true )
     ClienteEntity toEntity(ClienteDto clienteDto);
 
     void updateClienteDto(UpdateClienteDto updateClienteDto, @MappingTarget ClienteEntity clienteEntity);

@@ -12,9 +12,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CategoriaMapper {
-
-    @Mapping(source = "idCategoria",target = "idCategoria")
-    @Mapping(source = "nombre",target = "nombre")
     CategoriaDto toDto(CategoriaEntity entity);
     List<CategoriaDto> toDto(Iterable<CategoriaEntity> categoriaEntityList);
 

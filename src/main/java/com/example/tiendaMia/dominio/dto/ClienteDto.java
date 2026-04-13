@@ -1,7 +1,7 @@
 package com.example.tiendaMia.dominio.dto;
 
 public record ClienteDto(
-    Integer id,
+    Integer idCliente,
     String dni,
     String nombre,
     String apellido,
