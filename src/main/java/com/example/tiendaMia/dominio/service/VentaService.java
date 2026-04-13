@@ -15,7 +15,6 @@ public class VentaService {
     }
 
     //Falta agregar la logica de que el total de la venta es casi el total de detalles
-    //Tambien faltaria agregar que la fecha de se genere en automatico y se guarde
     public VentaDto save(VentaDto ventaDto){
         return ventaRespository.save(ventaDto);
     }

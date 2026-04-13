@@ -9,6 +9,7 @@ import com.example.tiendaMia.persistencia.entity.VentaEntity;
 import com.example.tiendaMia.persistencia.mapper.VentaMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -30,8 +31,7 @@ public class VentaEntityRepository implements VentaRespository {
     @Override
     public VentaDto save(VentaDto ventaDto) {
         VentaEntity ventaEntity = ventaMapper.toEntity(ventaDto);
-        crudVentaEntity.save(ventaEntity);
-        return ventaMapper.toDto(ventaEntity);
+        return ventaMapper.toDto(crudVentaEntity.save(ventaEntity));
     }
 
 }

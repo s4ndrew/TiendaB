@@ -15,6 +15,8 @@ public interface VentaMapper {
     VentaDto toDto(VentaEntity ventaEntity);
     List<VentaDto> toDto(List<VentaEntity> ventaEntities);
 
+
     @InheritInverseConfiguration
+    @Mapping(ignore = true, target = "fecha")
     VentaEntity toEntity(VentaDto ventaDto);
 }

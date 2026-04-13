@@ -4,9 +4,9 @@ import com.example.tiendaMia.dominio.dto.DetalleDto;
 import com.example.tiendaMia.dominio.service.DetalleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/detalle")
@@ -17,7 +17,12 @@ public class DetalleController {
     }
 
     @PostMapping
-    public ResponseEntity<DetalleDto> save(DetalleDto detalleDto){
+    public ResponseEntity<DetalleDto> save(@RequestBody DetalleDto detalleDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(detalleService.save(detalleDto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DetalleDto>> get(){
+        return ResponseEntity.ok(detalleService.getAll());
     }
 }

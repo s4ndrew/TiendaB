@@ -1,9 +1,8 @@
 package com.example.tiendaMia.dominio.service;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
 import com.example.tiendaMia.dominio.repository.CategoriaRepository;
-import com.example.tiendaMia.persistencia.crud.CrudCategoriaEntity;
-import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,20 +24,11 @@ public class CategoriaService {
         return categoriaRepository.save(categoriaDto);
     }
 
-    /*
-    private final CrudCategoriaEntity categoriaEntityRepository;
 
-    public CategoriaService(CrudCategoriaEntity categoriaEntityRepository) {
-        this.categoriaEntityRepository = categoriaEntityRepository;
+    public CategoriaDto update(Integer id, UpdateCatDto updateCategoriaDto){
+        return categoriaRepository.update(id,updateCategoriaDto);
     }
-
-
-    public CategoriaEntity guardarCategoria(CategoriaEntity categoria){
-        return categoriaEntityRepository.save(categoria);
+    public void delete(Integer id){
+         categoriaRepository.delete(id);
     }
-
-    public Iterable<CategoriaEntity> lisCategorias(CategoriaEntity categoria){
-        return categoriaEntityRepository.findAll();
-    }
-     */
 }

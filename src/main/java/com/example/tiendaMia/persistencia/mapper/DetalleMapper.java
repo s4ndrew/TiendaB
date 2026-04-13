@@ -12,13 +12,16 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DetalleMapper {
-
+    @Mapping(source = "cantidad",target = "cantidad")
+    @Mapping(source = "precioUnitario",target = "precioUnitario")
     @Mapping(source = "ventaEntity.idVenta", target = "idVenta")
     @Mapping(source = "productoEntity.idProducto", target = "idProducto")
     DetalleDto toDto(DetalleEntity detalleEntity);
     List<DetalleDto> toDto(List<DetalleEntity> detalleEntityList);
 
     //@InheritInverseConfiguration
+    @Mapping(source = "cantidad",target = "cantidad")
+    @Mapping(source = "precioUnitario",target = "precioUnitario")
     @Mapping(source = "idVenta", target = "ventaEntity",qualifiedByName = "mapVenta")
     @Mapping(source = "idProducto", target = "productoEntity",qualifiedByName = "mapProducto")
     DetalleEntity toEntity(DetalleDto detalleDto);

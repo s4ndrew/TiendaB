@@ -28,6 +28,6 @@ public class DetalleEntityRepository implements DetalleRepository {
 
     @Override
     public List<DetalleDto> get() {
-        return List.of();
+        return detalleMapper.toDto(crudDetalleEntity.findAll());
     }
 }

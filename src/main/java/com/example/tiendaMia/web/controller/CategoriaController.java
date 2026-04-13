@@ -1,9 +1,11 @@
 package com.example.tiendaMia.web.controller;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
 import com.example.tiendaMia.dominio.service.CategoriaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,13 +18,6 @@ public class CategoriaController {
     public CategoriaController(CategoriaService serviceCategoria) {
         this.serviceCategoria = serviceCategoria;
     }
-
-    /*
-    @PostMapping("/guardarCategoria")
-    public ResponseEntity<CategoriaEntity> add(@RequestBody CategoriaEntity categoria){
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.serviceCategoria.guardarCategoria(categoria));
-    }
-    */
     @GetMapping
     public ResponseEntity<List<CategoriaDto>> getAll(){
         return ResponseEntity.ok(serviceCategoria.getAll());
@@ -33,4 +28,15 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceCategoria.save(categoriaDto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        serviceCategoria.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDto> update(@PathVariable Integer id, @RequestBody @Validated UpdateCatDto updateCategoriaDto){
+        return ResponseEntity.ok(serviceCategoria.update(id,updateCategoriaDto));
+    }
 }

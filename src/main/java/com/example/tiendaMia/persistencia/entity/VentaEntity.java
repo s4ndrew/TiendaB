@@ -18,7 +18,7 @@ public class VentaEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_venta")
     private Integer idVenta;
-    private LocalDate fecha;
+    private LocalDate fecha = LocalDate.now();
     private Double total;
 
     @OneToMany(mappedBy = "ventaEntity")

@@ -1,11 +1,11 @@
 package com.example.tiendaMia.persistencia;
 
 import com.example.tiendaMia.dominio.dto.CategoriaDto;
+import com.example.tiendaMia.dominio.dto.updateDto.UpdateCatDto;
 import com.example.tiendaMia.dominio.repository.CategoriaRepository;
 import com.example.tiendaMia.persistencia.crud.CrudCategoriaEntity;
 import com.example.tiendaMia.persistencia.entity.CategoriaEntity;
 import com.example.tiendaMia.persistencia.mapper.CategoriaMapper;
-import jakarta.persistence.Entity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,5 +30,21 @@ public class CategoriaEntityRepository implements CategoriaRepository {
     public CategoriaDto save(CategoriaDto categoriaDto) {
         CategoriaEntity categoriaEntity = categoriaMapper.toEntity(categoriaDto);
         return categoriaMapper.toDto(crudCategoriaEntity.save(categoriaEntity));
+    }
+
+    @Override
+    public CategoriaDto update(Integer id, UpdateCatDto updateCategoriaDto) {
+        CategoriaEntity categoriaEntity = crudCategoriaEntity.findById(id).orElse(null);
+        if (categoriaEntity == null){
+            return null;
+        }
+        categoriaMapper.updateCategoriaDto(updateCategoriaDto,categoriaEntity);
+        return categoriaMapper.toDto(crudCategoriaEntity.save(categoriaEntity));
+    }
+
+
+    @Override
+    public void delete(Integer id) {
+        crudCategoriaEntity.deleteById(id);
     }
 }
