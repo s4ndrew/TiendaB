@@ -31,16 +31,6 @@ public class VentaEntityRepository implements VentaRespository {
     @Override
     public VentaDto save(VentaDto ventaDto) {
         VentaEntity ventaEntity = ventaMapper.toEntity(ventaDto);
-
-        double sbtotal = 0;
-
-        for (DetalleEntity detalleEntity : ventaEntity.getDetalleEntityList()){
-            detalleEntity.setVentaEntity(ventaEntity);
-            sbtotal += detalleEntity.getSubtotal();
-        }
-
-        ventaEntity.setTotal(sbtotal * 0.8);
-
         return ventaMapper.toDto(crudVentaEntity.save(ventaEntity));
     }
 
