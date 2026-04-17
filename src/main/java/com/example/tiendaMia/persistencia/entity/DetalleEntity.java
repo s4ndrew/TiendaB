@@ -27,4 +27,5 @@ public class DetalleEntity {
     @ManyToOne
     @JoinColumn(name = "id_producto")
     private ProductoEntity productoEntity;
+
 }
