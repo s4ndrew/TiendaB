@@ -7,14 +7,27 @@
 </head>
 <body>
 <h4>Tienda Mia</h4>
-<p>Lista de Categorias</p>
-<ul id="list">
+<form action="" id="form" class="form form">
+    <!-- <label for=""></label>
+     <select name="opciones" id="opciones">
+    <option value="valor1">Opción 1</option>
+    <option value="valor2">Opción 2</option>
+    <option value="valor3">Opción 3</option>
+  </select> -->
+  <label>Categorias:</label>
+  <select name="categorias" id="opcionesCategorias"></select>
 
-</ul>
+  <label for="">Productos:</label>
+  <select name="productos" id="opcionesProductos"></select>
 
-<ul id="clientes">
+  <label for="">Precio:</label>
+  <input type="text" placeholder="00" id="precioProducto">
 
-</ul>
+  <label for="">Cantidad:</label>
+  <input type="text" inputmode="numeric" placeholder="cantidad" pattern="[0-9]*" id="cantidadCompra">
+
+  <input type="button" value="Enviar">
+</form>
 
 <script src="js/app.js"></script>
 </body>
