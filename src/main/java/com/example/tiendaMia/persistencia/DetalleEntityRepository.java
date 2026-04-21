@@ -36,7 +36,7 @@ public class DetalleEntityRepository implements DetalleRepository {
         detalleEntity.setPrecioUnitario(productoEntity.getPrecio());
         detalleEntity.setSubtotal(detalleEntity.getPrecioUnitario() * detalleEntity.getCantidad()) ;
 
-        
+
         VentaEntity ventaEntity = crudVentaEntity.findById(detalleDto.idVenta())
                 .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
         double nuevoSbtotal = 0;
