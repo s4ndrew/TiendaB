@@ -91,21 +91,24 @@ const contenedorCategoria = document.getElementById("opcionesCategorias")
 const contenerdorProductos = document.getElementById("opcionesProductos")
 const cuadroDePrecio = document.getElementById("precioProducto")
 
+
+
 async function fecthCategorias() {
   const responseData = await sendHTTPRequest(
     "GET",
     "http://localhost:8089/tiendaMia/categorias",
   );
-  console.log(responseData);
+  //console.log(responseData);
   const listaCategorias = responseData;
   //CREACION DE CONTENEDOR
-
+  contenedorCategoria.innerHTML = "";
+  contenerdorProductos.innerHTML = "";
   for (const categoria of listaCategorias) {
     const optionCategoria = document.createElement("option");
-    optionCategoria.innerHTML = "";
     optionCategoria.value = categoria.idCategoria;
     optionCategoria.textContent = categoria.nombre;
     contenedorCategoria.appendChild(optionCategoria);
+        
   }
 
   fetchProductos();
@@ -136,7 +139,7 @@ async function fetchProductos() {
 }
 
 function precio(params) {
-    const precioElegido = contenerdorProductos.options[contenerdorProductos.selectedindex]    
+    const precioElegido = contenerdorProductos.options[contenerdorProductos.selectedIndex]    
     if (precioElegido) {
           cuadroDePrecio.value = precioElegido.getAttribute("data-precio");
     } else {
