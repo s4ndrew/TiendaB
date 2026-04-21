@@ -3,7 +3,7 @@ function sendHTTPRequest(method, url, data) {
     method: method,
     body: JSON.stringify(data),
     headers: {
-      "Content-type": "applicaction/json",
+      "Content-type": "application/json",
     },
   }).then((response) => {
     return response.json();
@@ -102,9 +102,11 @@ async function listarClientes() {
     "http://localhost:8089/tiendaMia/clientes",
   );
   console.log("Cat: ", responseData);
-  const listarClientes = responseData;
+  const listaClientes = responseData;
   const filaHead = document.createElement("tr");
-  if (listarClientes != null) {
+  headerClientes.innerHTML = ""
+  bodyClientes.innerHTML = ""
+  if (listaClientes != null) {
     filaHead.innerHTML = `
         <th>NOMBRE</th>
         <th>APELLIDO</th>
@@ -116,7 +118,7 @@ async function listarClientes() {
     filaHead.innerText = "No hay categorias";
   }
 
-  for (const cli of listarClientes) {
+  for (const cli of listaClientes) {
     const fila = document.createElement("tr");
     const nombre = document.createElement("td");
     const apellido = document.createElement("td");
@@ -134,3 +136,27 @@ async function listarClientes() {
   }
 }
 listarClientes();
+
+async function registrarCliente() {
+    const nuevoCliente = {
+        nombre: document.getElementById("inputNombre").value,
+        apellido: document.getElementById("inputApellido").value,
+        dni: document.getElementById("inputDni").value,
+        telefono: document.getElementById("inputTelefono").value
+    };
+
+    const response = await sendHTTPRequest(
+        "POST", 
+        "http://localhost:8089/tiendaMia/clientes", 
+        nuevoCliente
+    );
+
+    if (response) {
+        alert("¡Cliente registrado con éxito!");
+        // --- LA MAGIA ESTÁ AQUÍ ---
+        listarClientes(); 
+        
+        // Opcional: Limpiar el formulario
+        document.getElementById("tuFormularioId").reset();
+    }
+}

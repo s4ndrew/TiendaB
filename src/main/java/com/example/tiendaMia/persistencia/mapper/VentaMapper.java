@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {ClienteMapper.class})
 public interface VentaMapper {
 
     @Mapping(source = "clienteEntity.idCliente",target = "idCliente")
