@@ -98,7 +98,8 @@ async function listarProductos() {
   );
   console.log("Pro: ", responseData);
   const listaProductos = responseData;
-
+  headerProductos.innerHTML = ""
+  bodyProductos.innerHTML = ""
   if (listaProductos != null) {
     const filaHead = document.createElement("tr");
     filaHead.innerHTML = `
@@ -121,7 +122,7 @@ async function listarProductos() {
       <td>${pro.precio}</td>
       <td>${pro.stock}</td>
       <td>
-        <btn class=" btn btn-danger">Eliminar</btn>
+        <btn class=" btn btn-danger" onclick="eliminarProducto(${pro.idProducto})">Eliminar</btn>
       </td>
     `
     bodyProductos.appendChild(fila)
@@ -129,6 +130,22 @@ async function listarProductos() {
 }
 listarProductos();
 
+//Agregar productos
+
+
+//Eliminar productos
+
+async function eliminarProducto(id) {
+  const responseData = await sendHTTPRequest(
+    "DELETE",
+    `http://localhost:8089/tiendaMia/productos/${id}`
+  )
+
+  if(responseData){
+    alert("Producto eliminado")
+    listarProductos()
+  }
+}
 
 //Clientes
 
@@ -206,7 +223,7 @@ async function eliminarCliente(id) {
 
   if (response != null) {
     alert("Cliente eliminado")
-    
+
     listarClientes();
   }
 }
