@@ -1,12 +1,20 @@
 function sendHTTPRequest(method, url, data) {
   return fetch(url, {
     method: method,
-    body: JSON.stringify(data),
+    body: data ? JSON.stringify(data) : null,
     headers: {
       "Content-type": "application/json",
     },
   }).then((response) => {
-    return response.json();
+    if (response.status === 204) {
+      return { success: true }; 
+    }
+    return response.text().then((text) => {
+      if (!text) {
+        return { success: true };
+      }
+      return JSON.parse(text);
+    });
   });
 }
 
@@ -20,24 +28,65 @@ async function listarCategorias() {
   );
   console.log("Cat: ", responseData);
   const listaCategorias = responseData;
-  const celdaHead = document.createElement("th");
+  headerCategoria.innerHTML = ""
+  bodyCategorias.innerHTML = ""
   if (listaCategorias != null) {
-    console.log("siuuuuu");
-    celdaHead.innerText = "CATEGORIAS";
-    headerCategoria.appendChild(celdaHead);
+    const filaHead = document.createElement("tr")
+    filaHead.innerHTML = `
+      <th>CATEGORIA</th>
+      <th>ACCIONES</th>
+    `
+    headerCategoria.appendChild(filaHead);
   } else {
     celdaHead.innerText = "No hay categorias";
   }
 
   for (const cat of listaCategorias) {
     const fila = document.createElement("tr");
-    const celda = document.createElement("td");
-    celda.innerText = cat.nombre;
-    fila.appendChild(celda);
+    fila.innerHTML = `
+      <td>${cat.nombre}</td>
+      <td class=" text-center">
+        <btn class="btn btn-danger" onclick="eliminarCategorias(${cat.idCategoria})">Eliminar</btn>
+      </td>
+    `
     bodyCategorias.appendChild(fila);
   }
 }
 listarCategorias();
+
+//Agregar categorias
+
+async function agregaCategorias() {
+    const bodCate = {
+      nombre : document.getElementById("categoria").value
+    }
+    const responseData = await sendHTTPRequest(
+      "POST",
+      "http://localhost:8089/tiendaMia/categorias",bodCate
+    )
+
+    if (responseData) {
+      alert("Nuevo registro exitoso")
+      console.log("Nueva categoria: " + bodCate);
+      listarCategorias();
+    }
+}
+
+//Eliminar categorias
+async function eliminarCategorias(id) {
+    const responseData = await sendHTTPRequest(
+      "DELETE",
+      `http://localhost:8089/tiendaMia/categorias/${id}`
+    )
+
+    if (responseData) {
+      listarCategorias();
+      alert("Categoria eliminada")
+    }
+}
+
+
+
 
 //Productos
 const headerProductos = document.getElementById("tbhProductos");
@@ -52,41 +101,30 @@ async function listarProductos() {
 
   if (listaProductos != null) {
     const filaHead = document.createElement("tr");
-    const thNombre = document.createElement("th");
-    const thMarca = document.createElement("th");
-    const thPrecio = document.createElement("th");
-    const thStock = document.createElement("th");
-    console.log("siuuuuu");
-    thNombre.innerText = "NOMBRE"
-    thMarca.innerText = 'MARCA'
-    thPrecio.innerText = "PRECIO"
-    thStock.innerText = "STOCK"
-    filaHead.appendChild(thNombre)
-    filaHead.appendChild(thMarca)
-    filaHead.appendChild(thPrecio)
-    filaHead.appendChild(thStock)
-    headerProductos.appendChild(filaHead);
+    filaHead.innerHTML = `
+      <th>NOMBRE</th>
+      <th>MARCA</th>
+      <th>PRECIO</th>
+      <th>STOCK</th>
+      <th>ACCIONES</th>
+    `
+    headerProductos.appendChild(filaHead)
   } else {
     //celdaHead.innerText = "No hya categorias";
   }
 
   for (const pro of listaProductos) {
     const fila = document.createElement("tr");
-    const celdaNombre = document.createElement("td");
-    const celdaMarca = document.createElement("td");
-    const celdaPrecio = document.createElement("td");
-    const celdaStock = document.createElement("td");
-
-    celdaNombre.innerText = pro.nombre;
-    celdaMarca.innerText = pro.marca;
-    celdaPrecio.innerText = pro.precio;
-    celdaStock.innerText = pro.stock;
-    //celda.innerText = pro.precio;
-    fila.appendChild(celdaNombre);
-    fila.appendChild(celdaMarca);
-    fila.appendChild(celdaPrecio);
-    fila.appendChild(celdaStock);
-    bodyProductos.appendChild(fila);
+    fila.innerHTML = `
+      <td>${pro.nombre}</td>
+      <td>${pro.marca}</td>
+      <td>${pro.precio}</td>
+      <td>${pro.stock}</td>
+      <td>
+        <btn></btn>
+      </td>
+    `
+    bodyProductos.appendChild(fila)
   }
 }
 listarProductos();
@@ -112,6 +150,7 @@ async function listarClientes() {
         <th>APELLIDO</th>
         <th>DNI</th>
         <th>TELEFONO</th>
+        <th>OPCIONES</th>
     `
     headerClientes.appendChild(filaHead);
   } else {
@@ -120,23 +159,22 @@ async function listarClientes() {
 
   for (const cli of listaClientes) {
     const fila = document.createElement("tr");
-    const nombre = document.createElement("td");
-    const apellido = document.createElement("td");
-    const dni = document.createElement("td");
-    const telefono = document.createElement("td");
-    nombre.innerText = cli.nombre;
-    apellido.innerText = cli.apellido;
-    dni.innerText = cli.dni;
-    telefono.innerText = cli.telefono;
-    fila.appendChild(nombre);
-    fila.appendChild(apellido);
-    fila.appendChild(dni);
-    fila.appendChild(telefono);
+    fila.innerHTML = `
+      <td>${cli.nombre}</td>
+      <td>${cli.apellido}</td>
+      <td>${cli.dni}</td>
+      <td>${cli.telefono}</td>
+      <td>
+        <btn class="btn btn-danger" onclick="eliminarCliente(${cli.idCliente})">Eliminar</btn>
+      </td>
+
+    `
     bodyClientes.appendChild(fila);
   }
 }
 listarClientes();
 
+//INGRESAR NUEVO CLIENTE
 async function registrarCliente() {
     const nuevoCliente = {
         nombre: document.getElementById("inputNombre").value,
@@ -151,12 +189,23 @@ async function registrarCliente() {
         nuevoCliente
     );
 
-    if (response) {
+    if (response != null) {
         alert("¡Cliente registrado con éxito!");
-        // --- LA MAGIA ESTÁ AQUÍ ---
         listarClientes(); 
-        
-        // Opcional: Limpiar el formulario
-        document.getElementById("tuFormularioId").reset();
+        document.getElementById("formCliente").reset();
     }
+}
+
+//Elimnar cliente
+async function eliminarCliente(id) {
+
+  const response = await sendHTTPRequest(
+    "DELETE",
+    `http://localhost:8089/tiendaMia/clientes/${id}`
+  )
+
+  if (response != null) {
+    alert("Cliente eliminado")
+    listarClientes();
+  }
 }

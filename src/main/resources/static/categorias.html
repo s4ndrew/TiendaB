@@ -26,29 +26,26 @@
         <form action="POST">
           <div class="mb-3">
             <label for="">Nombre: </label>
-            <input type="text" placeholder="Abarrotes" class="form-control" />
+            <input type="text" placeholder="Abarrotes" class="form-control" id="categoria" />
           </div>
           <input
             type="button"
             value="Enviar"
             class="btn btn-success pe-4 ps-4"
-          />
+            onclick="agregaCategorias()"
+            />
         </form>
       </div>
 
-      <div id="lisCategorias" class="w-25">
+      <div id="lisCategorias" class="w-50">
         <table class="table table-bordered">
-          <thead>
-            <tr id="headCategorias"></tr>
+          <thead id="headCategorias">
           </thead>
           <tbody id="bodyTablaCategorias"></tbody>
         </table>
       </div>
     </div>
-
-
-
   
-    <script src="./js/resgitrosAndLis.js"></script>
+    <script src="./js/newAndList.js"></script>
   </body>
 </html>
