@@ -121,7 +121,7 @@ async function listarProductos() {
       <td>${pro.precio}</td>
       <td>${pro.stock}</td>
       <td>
-        <btn></btn>
+        <btn class=" btn btn-danger">Eliminar</btn>
       </td>
     `
     bodyProductos.appendChild(fila)
@@ -206,6 +206,7 @@ async function eliminarCliente(id) {
 
   if (response != null) {
     alert("Cliente eliminado")
+    
     listarClientes();
   }
 }
