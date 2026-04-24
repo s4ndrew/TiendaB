@@ -50,6 +50,11 @@ async function listarCategorias() {
       </td>
     `
     bodyCategorias.appendChild(fila);
+
+    const catProd = document.getElementById("option")
+    catProd.innerText = cat.nombre
+    catProd.value = cat.value
+    
   }
 }
 listarCategorias();
@@ -131,7 +136,21 @@ async function listarProductos() {
 listarProductos();
 
 //Agregar productos
+const categoriaProduct = document.getElementById("categoriaNewProduct")
+async function agregarProductos(cat) {
 
+  const nuevoProducto = {
+    nombre: document.getElementById("nombreProducto").value,
+    marca: document.getElementById("marcaProducto").value,
+    precio: document.getElementById("precioProducto").value,
+    stock: document.getElementById("productoStock").value,
+    categoria: document.getElementById("categoriaNewProduct").value
+  }
+  const responseData = await sendHTTPRequest(
+    "POST",
+    "http://localhost:8089/tiendaMia/productos"
+  )
+}
 
 //Eliminar productos
 
