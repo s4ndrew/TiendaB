@@ -54,7 +54,7 @@ async function listarCategorias() {
     const catProd = document.getElementById("option")
     catProd.innerText = cat.nombre
     catProd.value = cat.value
-    
+    categoriaProduct.appendChild(catProd)
   }
 }
 listarCategorias();
